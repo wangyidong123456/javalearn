@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #test{
+            width:100px;
+            height:100px;
+            background-color: red;
+        }
+    </style>
+    <script src="base.js"></script>
+</head>
+<body>
+<div id="test">
+
+</div>
+<script>
+    var test = document.getElementById("test");
+    var value = GlOBAL.DOM.getStyle(test,"backgroundColor");
+    alert(value.colorHex())
+</script>
+</body>
+</html>

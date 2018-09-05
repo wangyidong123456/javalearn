@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul{list-style: none}
+        *{margin:0;padding:0}
+        .table{
+            text-align: center;
+            margin-top: 100px;
+            margin-left:auto;
+            margin-right: auto;
+            width:350px;
+            border:1px solid #333;
+        }
+        .tab_wrap{
+            border-top: 1px solid #333;
+            position: relative;
+            height:300px;
+        }
+        .tab_wrap>div{
+            position: absolute;
+            height:100%;
+            width:100%;
+        }
+        .tab{
+            line-height: 50px;
+        }
+        .tab>li{
+            display: inline-block;
+            cursor: pointer;
+        }
+        input{
+            margin-top: 15px;
+            width:250px;
+            height:40px;
+        }
+        .code{
+            display: none;
+        }
+        .tab>li:first-child{
+            color:orangered;
+        }
+    </style>
+</head>
+<body>
+<div class="table">
+    <ul class="tab">
+        <li class="tab_menu">账号登录</li>
+        <li class="tab_menu">扫码登录</li>
+    </ul>
+    <div class="tab_wrap">
+        <div class="account tab_content">
+            <p><input type="text" placeholder="请输入手机号"/></p>
+            <p><input type="password" placeholder="请输入密码"/></p>
+            <p><input type="submit" placeholder="请输入密码"/></p>
+        </div>
+        <div class="code tab_content">
+            <img src="images/01.png" alt=""/>
+        </div>
+    </div>
+</div>
+<script>
+    /*获取两个被点击的li*/
+    var tabs = document.getElementsByClassName("tab_menu");
+    /*获取两个显示的div*/
+    var contents = document.getElementsByClassName("tab_content");
+    for(var i=0;i<tabs.length;i++){
+        tabs[i].value = i;
+        /*给每个li一个点击事件,让对应的div显示*/
+        tabs[i].onclick=function(){
+            /*让所有的li的字体的颜色为#333*/
+            var siblings = document.getElementsByClassName("tab")[0].children;
+            for(var k =0;k<siblings.length;k++){
+                siblings[k].style.color="#333"
+            }
+            /*让正在被点击的字体的颜色为orangered*/
+            this.style.color="orangered";
+            /*让所有的content隐藏*/
+            for(var j=0;j<contents.length;j++){
+                contents[j].style.display="none"
+            }
+            /*让对应的显示就行*/
+            contents[this.value].style.display="block";
+        }
+    }
+</script>
+</body>
+</html>

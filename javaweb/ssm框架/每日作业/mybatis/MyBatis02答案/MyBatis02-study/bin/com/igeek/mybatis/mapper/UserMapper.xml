@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.igeek.mybatis.mapper.UserMapper">
+
+	<!-- 根据包装pojo模糊查询用户 -->
+	<select id="queryUserByQueryVo" parameterType="queryVo"
+		resultType="user">
+		SELECT id,username,birthday,sex,address FROM `user` WHERE
+		username LIKE
+		'%${user.username}%'
+	</select>
+
+	<!-- 查询数据库数据条数，返回的是简单数据类型 -->
+	<select id="queryUserCount" resultType="int">
+		SELECT COUNT(*) FROM
+		`user`
+	</select>
+
+	<!-- 声明sql片段 -->
+	<sql id="userField">
+		id,username,birthday,sex,address
+	</sql>
+
+	<!-- 根据用户的性别和名字查询用户 -->
+	<select id="queryUserBySexAndUsername" parameterType="user"
+		resultType="user">
+		SELECT
+		<include refid="userField" />
+		FROM `user`
+		<where>
+			<if test="sex != null  and  sex != ''">
+				AND sex=#{sex}
+			</if>
+			<if test="username != null and username != ''">
+				AND username LIKE '%${username}%'
+			</if>
+		</where>
+	</select>
+
+	<!-- 使用List参数类型，动态sql之foreach标签 -->
+	<select id="queryUserByIds" parameterType="queryVo" resultType="user">
+		SELECT id,username,birthday,sex,address FROM `user` WHERE
+		<foreach collection="ids" item="item" open="id in (" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+
+	</select>
+
+	<!-- 配置resultMap实现一对多关联 -->
+	<resultMap type="user" id="UserOrderResultMap">
+		<id column="id" property="id" />
+
+		<result column="username" property="username" />
+		<result column="birthday" property="birthday" />
+		<result column="sex" property="sex" />
+		<result column="address" property="address" />
+
+		<collection property="orders" javaType="list" ofType="order">
+			<id column="oid" property="id" />
+
+			<result column="number" property="number" />
+			<result column="createtime" property="createtime" />
+			<result column="note" property="note" />
+		</collection>
+	</resultMap>
+
+
+	<!-- 一对多查询 -->
+	<select id="queryUserOrder" resultMap="UserOrderResultMap">
+		SELECT
+		u.id,
+		u.username,
+		u.birthday,
+		u.sex,
+		u.address,
+		o.id oid,
+		o.number,
+		o.createtime,
+		o.note
+		FROM
+		`user` u
+		LEFT JOIN `order` o ON u.id = o.user_id
+	</select>
+
+
+</mapper>

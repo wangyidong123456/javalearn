@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <style>
+        *{margin:0;padding:0}
+        .table{
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+            width:200px;
+            border:1px solid #333;
+
+        }
+        .head{
+            cursor: pointer;
+            background-color: aqua;
+            height:40px;
+
+        }
+        .table>div:last-child{
+            border-top: 1px solid #333;
+            height:100px;
+        }
+        .lightHigh{
+            background-color: indianred ;
+        }
+    </style>
+</head>
+<body>
+<div class="table">
+    <div class="head">
+        什么是jQuery
+    </div>
+    <div>
+        <p>jQuery是一个牛逼的开源库,将javaScript作了进一步的封装可以实现很多牛逼的功能</p>
+    </div>
+</div>
+<script>
+    $(function(){
+//        $(".head").on("click",function(){
+//            var $next = $(this).next();
+//            if($next.is(":visible")){
+//                $next.hide(1000)
+//            }else{
+//                $next.show(1000)
+//            }
+//
+//        })
+//        $(".head").on("mouseover",function(){
+//            $(this).next().hide();
+//        }).on("mouseout",function(){
+//            $(this).next().show()
+//        })
+        $(".head").mouseover(function(){
+            $(this).next().hide();
+            $(this).addClass("lightHigh")
+        }).mouseout(function(){
+            $(this).next().show();
+            $(this).removeClass("lightHigh")
+        });
+//          $(".head").click(function(){
+//            $(this).next().fadeToggle();
+//          })
+    })
+</script>
+</body>
+</html>

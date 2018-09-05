@@ -1,0 +1,95 @@
+解压nexus文件
+	nexus
+	sonatype-work
+	
+nexus文件夹中有nexus.bat安装文件
+	命令行  E:\nexus\nexus-2.14.5-02\bin>nexus.bat install  安装
+	启动服务
+	
+查看conf目录中的nexus.properties
+	port	- 8081
+	host	- 主机
+		
+可以访问web的nexus项目
+	http://192.168.13.199:8081/nexus
+		登录   admin   admin123
+		
+若 - 上传jar包方式 项目合作
+	maven的settings.xml中配置  <servers>
+		<server>
+	      <id>releases</id>
+	      <username>admin</username>
+	      <password>igeek</password>
+	    </server>
+		<server>
+	      <id>snapshots</id>
+	      <username>admin</username>
+	      <password>igeek</password>
+	    </server>
+	   
+在parent中 pom.xml中配置  - 与server相同的id
+	<!-- 配置连接私服 - deploy上传jar包至私服 -->
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<url>http://192.168.13.199:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>http://192.168.13.199:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>	   
+	    
+项目module - 使用命令 deploy 上传至私服
+	项目中使用  -  pom.xml中引入
+	
+--------------------------------------------------------------------	
+团队  - jar - 私服（第一人默认缓存下载  - 其他直接私服使用）
+	在maven的settings.xml中<profiles>标签中配置
+			<profile>     
+			    <!--profile 的 id-->  
+				<id>dev</id>     
+				 <repositories>     
+				   <repository>    
+					 <!--仓库 id，repositories 可以配置多个仓库，保证 id不重复--> 
+					 <id>nexus</id>     
+					 <!--仓库地址，即 nexus仓库组的地址--> 
+					 <url>http://192.168.13.199:8081/nexus/content/groups/public/</url>     
+				     <!--是否下载 releases 构件--> 
+					 <releases>     
+					   <enabled>true</enabled>     
+					  </releases>     
+				     <!--是否下载 snapshots 构件--> 
+					 <snapshots>     
+					   <enabled>true</enabled>     
+					 </snapshots>     
+				   </repository>     
+				 </repositories>    
+				 <pluginRepositories>    
+				     <!--  插件仓库，maven 的运行依赖插件，也需要从私服下载插件  --> 
+					 <pluginRepository>    
+					   <!--  插件仓库的 id不允许重复，如果重复后边配置会覆盖前边  --> 
+						 <id>public</id>    
+						 <name>Public Repositories</name>    
+						 <url>http://192.168.13.199:8081/nexus/content/groups/public/</url>    
+					 </pluginRepository>    
+				 </pluginRepositories>    
+			   </profile> 
+
+		<!-- 要激活配置的连接的私服仓库才可生效 -->
+	    <activeProfiles> 
+	     <activeProfile>dev</activeProfile> 
+	    </activeProfiles> 
+	
+	------------------------------------------------------
+		pom.xml中使用新的jar资源   - 把资源下载保存在私服
+	
+	------------------------
+		直接配置一个第三方阿里maven服务
+			add proxy repository
+				输入网址
+				
+			点击public repositories 
+				把配置的aliyun添加至左面   -  把aliyun放在central之前	
+				
+	

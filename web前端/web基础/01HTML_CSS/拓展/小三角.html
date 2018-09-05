@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		
+			.box{
+				width: 300px;
+				height: 40px;
+				position: relative;
+				border: 1px solid silver;
+			}
+			.box>input{
+				width: 260px;
+				height: 40px;
+				box-sizing: border-box;
+				border: none;
+				outline: none;
+			}
+			.box:after{
+				content: " ";
+				display: block;
+				position: absolute;
+				width: 0px;
+				height: 0px;
+				border: 10px solid transparent;
+				border-top-color: red;
+				z-index: 10;
+				right: 10px;
+				top: 15px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<input type="text" />
+		</div>
+	
+	</body>
+</html>

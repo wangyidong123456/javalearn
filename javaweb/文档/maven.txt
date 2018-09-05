@@ -1,0 +1,53 @@
+run as 
+	maven build...    	输入新命令
+	maven build		  	运行之前运行的命令
+
+Maven 的常用命令
+	test
+		test 是 maven 工程的测试命令，会执行 src/test/java 下的单元测试类。
+	clean
+		clean 是 maven 工程的清理命令，执行 clean 会删除 target 目录的内容。
+	compile
+		compile 是 maven 工程的编译命令，作用是将 src/main/java 下的文件编译为 class文件输出到 target 目录下。
+	package
+		package 是 maven 工程的打包命令，对于 java 工程执行 package 打成 jar 包，对于web 工程打成 war 包。
+	install
+		install 是 maven 工程的安装命令，执行 install 将 maven 打成 jar 包或 war 包发布到本地仓库
+		
+		maven -> update project -> 再运行命令
+		
+	运行:
+		tomcat7:run
+		jetty:run
+		
+Maven 的生命周期：
+	 命令与生命周期的阶段
+		每个 maven 命令对应生命周期的某个阶段，
+			例如：mvn clean 命令对应 clean 生命周期的 clean 阶段， 
+				mvn test 命令对应 default 生命周期的 test 阶段。
+		执行命令会将该命令在的在生命周期当中之前的阶段自动执行，
+			比如：执行 mvn clean命令会自动执行pre-clean和clean两个阶段，
+				 mvn test命令会自动执行validate、compile、test 等阶段。
+		执行某个生命周期的某个阶段不会影响其它的生命周期！
+		如果要同时执行多个生命周期的阶段可在命令行输入多个命令，中间以空格隔开，
+			例如：clean package 该命令执行 clean 生命周期的 clean 阶段和 default 生命周期的 package阶段
+			
+依赖冲突:
+	1、第一声明者优先原则 
+	    在pom 文件定义依赖，先声明的依赖为准。 
+	2、路径近者优先原则 
+		    例如：A     依赖 spirng-beans-4.2.4  ，A    依赖 B  依赖 spirng-beans-3.0.5  ，则 
+		spring-beans-4.2.4 优 先 被 依 赖 在 A         中 ， 因 为 spring-beans-4.2.4     相 对 
+		spirng-beans-3.0.5 被A 依赖的路径最近。 
+	3 排除依赖 
+		   依赖版本冲突的问题可以通过排除依赖的方式来解决，将传递依赖中不合理的依赖排除， 
+		使用合理的依赖来构建我们的工程。 
+		    排除依赖可以在依赖的配置dependency 中使用exclusion 标签来进行排除操作。 
+	4 锁定版本 
+		    面对众多的依赖，有一种方法不用考虑依赖路径、声明优化等因素可以采用直接锁定版 
+		本的方法确定依赖构件的版本，版本锁定后则不考虑依赖的声明顺序或依赖的路径，以锁定 
+		的版本的为准添加到工程中，此方法在企业开发中常用。锁定依赖的版本可以使用 
+		dependencyManagement 标签来设置。 
+		    需要注意的是在工程中锁定依赖的版本并不代表在工程中添加了依赖，如果工程需要添 
+		加锁定版本的依赖则需要单独添加<dependencies></dependencies>标签。 
+		

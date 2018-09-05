@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        span {
+            font-size: 30px;
+        }
+
+        body {
+            background-color: black;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="images/0.png" alt="" />
+        <img src="images/0.png" alt="" />
+        <span>:</span>
+        <img src="images/0.png" alt="" />
+        <img src="images/0.png" alt="" />
+        <span>:</span>
+        <img src="images/0.png" alt="" />
+        <img src="images/0.png" alt="" />
+    </div>
+    <script>
+        function getDouble(n) {
+            if (n < 10) {
+                return "0" + n;
+            } else {
+                return "" + n;
+            }
+        }
+        showTime();
+        function showTime() {
+            /*1.获取系统时间*/
+            var oDate = new Date();
+            var hour = oDate.getHours();
+            var minute = oDate.getMinutes();
+            var second = oDate.getSeconds();
+            /*2.显示系统时间
+             *a字符串连接
+             *b空零补位
+             * */
+            var imgs = document.getElementsByTagName("img");
+            var str = getDouble(hour) + getDouble(minute) + getDouble(second);
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].src = "images/" + str[i] + ".png"
+            }
+        }
+        setInterval(showTime, 1000);
+    </script>
+</body>
+
+</html>

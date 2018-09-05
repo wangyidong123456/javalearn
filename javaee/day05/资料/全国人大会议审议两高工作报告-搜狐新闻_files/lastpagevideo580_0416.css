@@ -1,0 +1,27 @@
+#container .video{width:580px;margin:15px auto;padding: 10px 10px 5px 10px;background:#F1F1F1;border:1px #D1D1D1 solid;font-size:12px;display:none;}
+#container #editVideo{display:block}
+#container .video .text-video-focus{text-align:center}
+#container .video .s-wb-sohu a{background-position:0 0}
+#container .video .s-wb-sina a{background-position:0 -20px}
+#container .video .s-kj-qq a{background-position:0 -40px}
+#container .video .s-rr a{background-position:0 -60px}
+#container .video .s-wb-qq a{background-position:0 -80px}
+#container .video .s-tianyi a{background-position:0 -100px}
+#container .video .s-kx001 a{background-position:0 -120px}
+#container .video .s-py-qq a{background-position:0 -140px}
+#container .video .s-wb-163 a{background-position:0 -160px}
+#container .video .s-msn a{background-position:0 -180px}
+#container .video .s-bsh a{background-position:0 -200px}
+#container .video .s-itb a{background-position:0 -220px}
+#container .video .s-db a{background-position:0 -240px}
+#container .video .s-kj-fx a{background-position:0 -260px}
+#container .video .s-ty a{background-position:0 -280px}
+#container .video .s-51 a{background-position:0 -300px}
+#container .video .s-tv a{background-position:0 -320px}
+#container .video .video-mutu{margin:4px auto 0;border-top:1px #D1D1D1 solid;width:358px;height:20px;overflow:hidden;padding:3px 0 0;line-height:20px;color:#666}
+#container .video .video-mutu-a{margin:3px auto 0;width:358px;height:20px;overflow:hidden;line-height:20px;color:#666}
+#container .video .num-share{margin:7px auto 0;height:23px;width: 580px;padding: 5px 0 0 0;overflow: hidden;background: #f1f1f1;}
+#newsEditVideo{float:right;display:inline;margin:0}
+#container #video-Title {float: left;width: 322px;}
+#container #video-Title h3 {line-height: 23px;font-size: 14px;color: #666666}
+#newsEditVideo .vbtn-ding,#newsEditVideo .vbtn-cai{padding: 0 8px 0 33px;}

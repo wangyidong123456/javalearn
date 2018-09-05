@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="plugins/sHover.min.js"></script>
+    <style>
+        .wrap{
+            display: inline-block;
+        }
+        .item{
+            background-color:#2ca9e1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <img src="images/01.jpg" alt="">
+        <div class="item">
+            <p>Title</p>
+            <p>hello world</p>
+            <button>Try it</button>
+        </div>
+    </div>
+    <script>
+        window.onload = function(){
+            var hover = new sHover("wrap","item");
+            hover.set({
+                Speed:5,
+                opacity:60,
+                opacityChange:true
+            })
+        }
+    </script>
+</body>
+
+</html>

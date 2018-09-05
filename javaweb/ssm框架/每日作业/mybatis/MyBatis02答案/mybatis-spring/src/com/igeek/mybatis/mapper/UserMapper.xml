@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.igeek.mybatis.mapper.UserMapper">
+	<!-- 根据用户id查询 -->
+	<select id="queryUserById" parameterType="int"
+		resultType="com.igeek.mybatis.pojo.User">
+		select * from user where id = #{id}
+	</select>
+
+	<!-- 根据用户名模糊查询用户 -->
+	<select id="queryUserByUsername" parameterType="string"
+		resultType="com.igeek.mybatis.pojo.User">
+		select * from user where username like '%${value}%'
+	</select>
+
+	<!-- 添加用户 -->
+	<insert id="saveUser" parameterType="com.igeek.mybatis.pojo.User">
+		<selectKey keyProperty="id" keyColumn="id" order="AFTER"
+			resultType="int">
+			select last_insert_id()
+		</selectKey>
+		insert into user
+		(username,birthday,sex,address) values
+		(#{username},#{birthday},#{sex},#{address})
+	</insert>
+
+	<!-- 使用用户性别和名字查询用户，并使用if标签、where标签 -->
+	<!-- public List<User> queryUserBySexAndUsername(User user); -->
+	<select id="queryUserBySexAndUsername" parameterType="com.igeek.mybatis.pojo.User"
+		resultType="com.igeek.mybatis.pojo.User">
+		SELECT
+		<include refid="userField" />
+		FROM `user`
+		<where>
+			<if test="sex != null  and  sex != ''">
+				AND sex=#{sex}
+			</if>
+			<if test="username != null and username != ''">
+				AND username LIKE '%${username}%'
+			</if>
+		</where>
+	</select>
+
+	<!-- 使用sql标签提取Maper.xml中的相同的sql片段 -->
+	<sql id="userField">
+		id,username,birthday,sex,address
+	</sql>
+
+	<!-- 使用foreach标签实现使用多个id查询用户信息 -->
+	<!-- public List<User> queryUserByIds(QueryVo queryVo); -->
+	<select id="queryUserByIds" parameterType="com.igeek.mybatis.pojo.QueryVo"
+		resultType="com.igeek.mybatis.pojo.User">
+		SELECT id,username,birthday,sex,address FROM `user` WHERE
+		<foreach collection="ids" item="item" open="id in (" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+	</select>
+
+	<!-- 配置resultMap实现一对多关联 -->
+	<resultMap type="com.igeek.mybatis.pojo.User" id="UserResultMap">
+		<id column="id" property="id" />
+
+		<result column="username" property="username" />
+		<result column="birthday" property="birthday" />
+		<result column="sex" property="sex" />
+		<result column="address" property="address" />
+
+		<collection property="orders" javaType="list"
+			ofType="com.igeek.mybatis.pojo.Order">
+			<id column="oid" property="id" />
+
+			<result column="number" property="number" />
+			<result column="createtime" property="createtime" />
+			<result column="note" property="note" />
+		</collection>
+	</resultMap>
+
+
+	<!-- 使用resultMap配置，实现用户-订单的一对多查询" -->
+	<!-- public List<User> queryUserOrder(); -->
+	<select id="queryUserOrder" resultMap="UserResultMap">
+		SELECT
+		u.id,
+		u.username,
+		u.birthday,
+		u.sex,
+		u.address,
+		o.id oid,
+		o.number,
+		o.createtime,
+		o.note
+		FROM
+		`user` u
+		LEFT JOIN `order` o ON u.id = o.user_id
+	</select>
+
+
+</mapper>

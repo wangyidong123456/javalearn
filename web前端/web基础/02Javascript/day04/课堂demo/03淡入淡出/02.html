@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #parent {
+            width: 600px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+            padding: 10px;
+            border-radius: 3px;
+        }
+
+        #parent img {
+            position: absolute;
+        }
+
+        #child {
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            background: #ff2d51;
+            z-index: 100;
+            opacity: .3;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 鼠标移入变成80,鼠标移出30 -->
+    <div id="parent">
+        <img src="images/04.png" alt="">
+        <div id="child"></div>
+    </div>
+    <script>
+        var alpha = 30;
+        var timer = null
+        var child = document.getElementById("child");
+        child.onmouseover = function(){
+            goMove(80,2)
+        }
+        child.onmouseout = function(){
+            goMove(10,-2)
+        }
+        function goMove(target,speed){
+            clearInterval(timer);
+            setInterval(function(){
+                if(alpha == target){
+                    clearInterval(timer)
+                }else{
+                    alpha+=speed;
+                    child.style.opacity = alpha/100;
+                }
+            },30)
+        }
+    </script>
+</body>
+
+</html>

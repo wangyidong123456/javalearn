@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.igeek.mybatis.dao.TbOrderMapper">
+
+	<!-- 实现创建订单 -->
+	<!-- void saveTbOrder(TbOrder tbOrder); -->
+	<insert id="saveTbOrder" parameterType="tbOrder">
+		INSERT INTO `tb_order` (
+		`payment`,
+		`paymentType`,
+		`postFee`,
+		`status`,
+		`createTime`,
+		`updateTime`,
+		`paymentTime`,
+		`consignTime`,
+		`endTime`,
+		`closeTime`,
+		`userId`,
+		`buyerMessage`,
+		`buyerNick`
+		)
+		VALUES
+		(
+		#{payment},
+		#{paymentType},
+		#{postFee},
+		#{status},
+		#{createTime},
+		#{updateTime},
+		#{paymentTime},
+		#{consignTime},
+		#{endTime},
+		#{closeTime},
+		#{userId},
+		#{buyerMessage},
+		#{buyerNick}
+		)
+	</insert>
+
+	<!-- 实现根据订单id查询订单 -->
+	<!-- TbOrder queryTbOrderById(Long id); -->
+	<select id="queryTbOrderById" parameterType="long" resultType="tbOrder">
+		SELECT * FROM tb_order WHERE id=#{id}
+	</select>
+
+	<!-- 实现根据订单创建的时间范围(例如查询3月26日这一天的)，查询所有支付类型为在线支付，而且已付款的订单 -->
+	<!-- List<TbOrder> queryTbOrderByDate(Map<String, Object> map); -->
+	<select id="queryTbOrderByDate" parameterType="map" resultType="tbOrder">
+		SELECT
+		*
+		FROM
+		tb_order
+		WHERE
+		createTime BETWEEN #{startTime}
+		AND #{endTime}
+		AND paymentType = 1
+		AND STATUS = 2
+	</select>
+
+	<!-- 实现根据买家留言模糊查询订单 -->
+	<!-- List<TbOrder> queryTbOrderByBuyerMessage(String msg); -->
+	<select id="queryTbOrderByBuyerMessage" parameterType="string"
+		resultType="tbOrder">
+		SELECT
+		*
+		FROM
+		tb_order
+		WHERE
+		buyerMessage LIKE '%${value}%'
+	</select>
+
+	<!-- 实现根据订单id修改订单 -->
+	<!-- void updateTbOrderById(TbOrder tbOrder); -->
+	<update id="updateTbOrderById" parameterType="tbOrder">
+		UPDATE `tb_order`
+		SET
+		`payment` = #{payment},
+		`paymentType` = #{paymentType},
+		`postFee` =
+		#{postFee},
+		`status` = #{status},
+		`createTime` = #{createTime},
+		`updateTime` = #{updateTime},
+		`paymentTime` = #{paymentTime},
+		`consignTime` = #{consignTime},
+		`endTime` = #{endTime},
+		`closeTime` =
+		#{closeTime},
+		`userId` = #{userId},
+		`buyerMessage` = #{buyerMessage},
+		`buyerNick` = #{buyerNick}
+		WHERE
+		(`id` = #{id})
+
+
+	</update>
+
+	<!-- 实现根据订单创建的时间范围(例如查询3月26日这一天的)，修改所有支付类型是在线支付的，而且未付款的，把订单状态修改为交易关闭 -->
+	<!-- void updateTbOrderByDate(Map<String, Object> map); -->
+	<update id="updateTbOrderByDate" parameterType="map">
+		UPDATE `tb_order`
+		SET `status` = '6'
+		WHERE
+		createTime
+		BETWEEN #{startTime}
+		AND #{endTime}
+		AND `paymentType` = 1
+		AND `status`
+		= 1
+	</update>
+
+	<!-- 实现根据id删除订单 -->
+	<!-- void deleteTbOrderById(Long id); -->
+	<delete id="deleteTbOrderById" parameterType="long">
+		DELETE FROM
+		tb_order WHERE `id`=#{id}
+	</delete>
+
+</mapper>

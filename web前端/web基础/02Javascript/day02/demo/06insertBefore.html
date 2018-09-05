@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="parent">
+        <p id="target">hello world</p>
+    </div>
+    <script>
+        var parent = document.getElementById("parent");
+        var target = document.getElementById("target");
+        var p = document.createElement("p");
+        var txt = document.createTextNode("before");
+        p.appendChild(txt);
+        parent.insertBefore(p,target);
+        
+    </script>
+</body>
+</html>

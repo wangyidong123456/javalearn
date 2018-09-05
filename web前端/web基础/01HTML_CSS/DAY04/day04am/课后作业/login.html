@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0}
+        body{background:url(images/bg.png) no-repeat center center;background-size: cover;font-family: Helvetica;color:#999}
+        .form{
+            margin-top: 50px;
+            width:400px;box-shadow: 0 0 15px 3px rgba(51, 51, 51, 0.53);margin-left:auto;margin-right:auto;text-align: center;
+            background:#fff;overflow:hidden;}
+        input{width:336px;padding:8px;outline: none;height:30px;border:1px solid #e0e0e0}
+        .login{font-size: 22px;margin-top:30px;margin-bottom: 30px;}
+        .login span{color:#333}
+        .login span.active{color:#f56600}
+        .phone{
+            margin-bottom: 15px;}
+        .password{margin-bottom: 20px;}
+        .submit input{width:352px;height:50px;background:#f56600;color:white;font-size: 18px;margin-bottom: 20px;}
+        .register{margin-bottom: 130px;}
+        .footer{
+            width:352px;margin-left:auto;margin-right:auto;
+        }
+        .footer .qita{position:relative;margin-bottom:15px;}
+        .qita .left,.right{position:absolute;display: block;width:125px;height:1px;background:#999;top:50%}
+        .right{right:0}
+        .AllIcon{overflow: hidden;margin-bottom: 30px;}
+        .AllIcon a{
+            display:block;
+            float:left;
+            width:18px;
+            height:18px;
+            background: #747474 url(images/icons_type.png) no-repeat ;
+            margin-left:50px;
+
+        }
+        .AllIcon .one{background-position: -20px 0}
+        .AllIcon .two{background-position: -38px 0}
+        .AllIcon .three{background-position: -57px 0}
+        .AllIcon .four{background-position: -85px 0}
+    </style>
+</head>
+<body>
+<div class="form">
+    <form>
+        <p class="login">
+            <span class="active">账号登录</span>
+            <span style="color:#e0e0e0">|</span>
+            <span class="saoma">扫码登录</span>
+        </p>
+        <p class="phone">
+            <input type="text" placeholder="邮箱/手机号/小米账号"/>
+        </p>
+        <p class="password">
+            <input type="password" placeholder="密码"/>
+        </p>
+        <p class="submit">
+            <input type="submit" value="登录"/>
+        </p>
+    </form>
+    <p class="register">
+        <span>注册小米账号</span>
+        <span>|</span>
+        <span>忘记密码?</span>
+    </p>
+    <div class="footer">
+        <p class="qita">
+            <span class="left"></span>
+            其他方式登录
+            <span class="right"></span>
+        </p>
+        <div class="AllIcon">
+            <a href="#" class="one"></a>
+            <a href="#" class="two"></a>
+            <a href="#" class="three"></a>
+            <a href="#" class="four"></a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="bena1" class="com.igeek.Bean1"></bean>
+	
+	<bean id="bean2" class="com.igeek.Bean2" factory-method="getBean2"/>
+	
+	
+	<!-- 3：实例工厂的方式实例化bean -->
+	<bean id="bean3Factory" class="com.igeek.Bean3Factory"/>
+	<!-- factory-bean相当于ref：引用一个bean对象 -->
+	<bean id="bean3" factory-bean="bean3Factory" factory-method="getBean3"/>
+	
+	<bean id="bean4" class="com.igeek.Bean4FactoryBean"></bean>
+	<!-- spring4中bean的范围默认是单例 -->
+	<bean id="singletonBean" class="com.igeek.scope.SingletonBean"></bean>
+	
+	<bean id="prototypeBean" class="com.igeek.scope.PrototypeBean" scope="prototype"></bean>
+	
+	
+	<bean id="lifeCycleBean" class="com.igeek.xmllifecycle.LifeCycleBean"
+		init-method="init" destroy-method="destroy"
+	></bean>
+	
+	<!-- 导入其他spring配置文件 -->
+	<import resource="applicationContext2.xml"/>
+	<bean class="com.igeek.xmllifecycle.MyBeanPostProcessor"></bean>
+	
+	<bean id="car" class="com.igeek.xmlpropertydi.Car">
+		<constructor-arg index="0" name="id" value="1"></constructor-arg>
+		<constructor-arg name="name">
+			<value>BMW</value>
+		</constructor-arg>
+		<constructor-arg name="price" type="java.lang.Double" value="99999D"></constructor-arg>
+	</bean>
+	
+	<bean id="person" class="com.igeek.xmlpropertydi.Person">
+		<property  name="id" value="110"></property>
+		<property name="name" value="警察"></property>
+		<property name="car">
+			<ref bean="car"/>
+		</property>
+	</bean>
+	
+	<bean id="person2" class="com.igeek.xmlpropertydi.Person" p:id="2" p:name="奥迪" p:car-ref="car"></bean>
+	
+	<bean id="person3" class="com.igeek.xmlpropertydi.Person" p:id="#{car.id}" p:name="#{car.name}" p:car="#{car}"/>
+
+	
+	
+
+</beans>

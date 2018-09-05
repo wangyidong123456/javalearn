@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0}
+        #parent{
+            top:50px;
+            position:absolute;
+            width:100px;
+            height:160px;
+            background:#ff2d51;
+            left:-100px;
+        }
+        #share{
+            width:20px;
+            height:60px;
+            background:#007aff;
+            position: absolute;
+            top:50px;
+            right:-20px;
+        }
+    </style>
+</head>
+<body>
+<div id="parent">
+    <div id="share"></div>
+</div>
+<script>
+    var share = document.getElementById("share");
+    var timer;
+    function goStart(){
+        var parent = document.getElementById("parent");
+        clearInterval(timer);
+        timer = setInterval(function () {
+            if(parent.offsetLeft >= 0){
+                clearInterval(timer)
+            }else{
+                parent.style.left = parent.offsetLeft+10+"px"
+            }
+        },30)
+    }
+    function goStart1(){
+        var parent = document.getElementById("parent");
+        clearInterval(timer);
+        timer = setInterval(function () {
+            if(parent.offsetLeft <= -100){
+                clearInterval(timer)
+            }else{
+                parent.style.left = parent.offsetLeft-10+"px"
+            }
+        },30)
+    }
+    share.onmouseover = function () {
+        goStart();
+    };
+    share.onmouseout = function () {
+        goStart1();
+    };
+</script>
+</body>
+</html>

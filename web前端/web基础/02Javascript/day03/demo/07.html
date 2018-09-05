@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul id="ul">
+
+</ul>
+<script>
+    window.onload = function () {
+        var oUl = document.getElementById("ul");
+        var oFrag = document.createDocumentFragment();
+        for(var i=0;i<10;i++){
+            var li = document.createElement("li");
+            oFrag.appendChild(li);
+        }
+        oUl.appendChild(oFrag);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="js/jquery-3.2.1.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="granpa">
+    <div class="parent">
+        <div class="child">child</div>
+    </div>
+</div>
+<script>
+    var parent = $(".child").parents();
+    console.log(parent);
+    parent.css({width:"200px"})
+</script>
+</body>
+</html>

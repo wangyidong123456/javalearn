@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="js/jquery-3.2.1.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .high{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="address" value="请输入邮箱地址"/>
+<input type="text" id="pwd" value="请输入邮箱密码"/>
+<input type="button" value="登录"/>
+<script>
+    $("#address").focus(function(){
+        var txt_value = $(this).val();
+        if(txt_value==this.defaultValue){
+            $(this).val("");
+        }
+    })
+    $("#address").blur(function(){
+        var txt_value = $(this).val();
+        if(txt_value==""){
+            $(this).val(this.defaultValue);
+        }
+    })
+</script>
+</body>
+</html>

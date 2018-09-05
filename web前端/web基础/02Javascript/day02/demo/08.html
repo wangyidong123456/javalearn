@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <span id="mi">小米5</span><button id="btn">删除</button>
+    </div>
+    <script>
+        var num =0,max=10;
+        var time;
+        function go(){
+            if(num>max){
+                clearTimeout(time)
+            }else{
+                num++;
+                console.log(num);
+                time = setTimeout(go,1000)
+            }
+        }
+        go();
+    </script>
+</body>
+</html>

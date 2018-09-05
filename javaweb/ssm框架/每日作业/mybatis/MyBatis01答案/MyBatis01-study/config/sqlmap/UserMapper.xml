@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.igeek.mybatis.dao.UserMapper">
+
+	<!-- 根据id查询用户 -->
+	<select id="queryUserById" parameterType="InT"
+		resultType="com.igeek.mybatis.pojo.User">
+		select * from user where id = #{id}
+	</select>
+
+	<!-- 根据用户名查询用户 -->
+	<select id="queryUserByUserName" parameterType="string"
+		resultType="com.igeek.mybatis.pojo.User">
+		select * from user where username like '%${value}%'
+	</select>
+
+	<!-- 新增用户 -->
+	<insert id="saveUser" parameterType="com.igeek.mybatis.pojo.User">
+		insert into user
+		(username,birthday,sex,address) values
+		(#{username},#{birthday},#{sex},#{address})
+	</insert>
+
+	<!-- 更新用户 -->
+	<update id="updateUser" parameterType="com.igeek.mybatis.pojo.User">
+		UPDATE `user` SET
+		address =
+		#{address}
+		WHERE username = #{username}
+	</update>
+
+	<!-- 删除用户 -->
+	<delete id="deleteUserById" parameterType="int">
+		DELETE FROM `user`
+		WHERE id=#{id}
+	</delete>
+</mapper>

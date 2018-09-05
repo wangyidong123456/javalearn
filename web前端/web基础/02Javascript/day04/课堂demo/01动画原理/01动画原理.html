@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        #div {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 使用定时器实现动画 -->
+    <div id="div" style="left:50px"></div>
+    <button id="btn">动画</button>
+    <script>
+        /* 1.点击按钮,每过30秒,left值加10,
+           2.到500px时，停止动画 */
+           /* 技术要点
+           1.if--else
+           2.进入定时器之前,先清除定时器
+            */
+        var div = document.getElementById("div");
+        var btn = document.getElementById("btn");
+        var timer;
+        btn.onclick = function () {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                var leftValue = parseInt(div.style.left);
+                if (leftValue == 500) {
+                    clearInterval(timer);
+                } else {
+                    
+                    div.style.left = leftValue + 10 + "px";
+                }
+                console.log(leftValue)
+            }, 30)
+        }
+
+    </script>
+</body>
+
+</html>

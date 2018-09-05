@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="js/jquery-3.2.1.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul>
+    <li>hello world01</li>
+    <li class="col-4">hello world02</li>
+    <li>hello world03</li>
+</ul>
+<script>
+    $("ul li").click(function(){
+        alert($(this).html())
+    });
+    $("ul>li:eq(0)").replaceWith("<strong>good</strong>")
+</script>
+</body>
+</html>

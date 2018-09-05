@@ -1,0 +1,41 @@
+@charset "utf-8";
+/*
+ * Copyright 2015, 56.com
+ * For:搜狐影音
+ * Creator:ShuHong
+ * $Author: shuhong.xiao $
+ * $Date: 2015-12-22 11:41:25 +0800 (Tue, 22 Dec 2015) $
+ */
+
+ body.sohu_generalize_body{ background: #fff; }
+
+ .sohu_generalize_wrap{ width: 650px;margin: 0 auto;overflow: hidden;background: #fff; }
+ .sohu_generalize_wrap .container{ width: 650px;margin: 0 auto;min-width: 650px; }
+ .sohu_generalize_wrap .content{ width: 650px;height: 175px;padding-bottom: 0;margin: 0 auto;overflow: hidden; }
+
+ .sohu_generalize_tab{ position: relative; }
+ .sohu_generalize_tab_nav{ height: 38px;border-bottom: 1px solid #e6e6e6; }
+ .logo{ float: left;display: block;width: 94px;height: 27px;margin: 5px 20px 0 0;background: url('http://file3.qf.56.itc.cn/style/sohu_generalize/v1/img/logo.jpg') no-repeat; }
+ .app_to_girl{ float: right;padding-left: 14px;margin-top: 10px;background: url('http://file3.qf.56.itc.cn/style/sohu_generalize/v1/img/app_icon.png') left center no-repeat;font-size: 12px;color: #44708e; }
+ .app_to_girl:hover{ color: #f00; }
+
+ /* 标签 */
+ .sohu_generalize_tab_nav ul{ position: relative;float: left;top: 1px; }
+ .sohu_generalize_tab_nav ul li{ float: left;_border: 0; }
+ .sohu_generalize_tab_nav ul li a{ display: block;width: 74px;height: 35px;border-width: 2px 1px 1px 1px;border-color: #fff #fff #e6e6e6 #fff;border-style: solid;color: #0761ad;line-height: 35px;text-align: center;font-size: 14px;color: #333;_float: left; }
+ .sohu_generalize_tab_nav ul li.active a{ border-color: #0761ad #e6e6e6 #fff #e6e6e6;color: #0761ad; }
+
+ .sohu_generalize_tab_con{ width: 650px;padding-top: 20px;margin-right: -14px;overflow: hidden; }
+ .sohu_generalize_tab_con ul{ display: none;width: 664px;_border: 0; }
+ .sohu_generalize_tab_con ul.active{ display: block; }
+
+ /* 模版 */
+ .sohu_generalize_wrap .con_item{ width: 150px;margin: 0 16px 0 0; }
+ .sohu_generalize_wrap .con_item .item_hd{ width: 150px;height: 93px; }
+ .sohu_generalize_wrap .con_item .item_hd a{ height: 95px; }
+ .sohu_generalize_wrap .con_item .item_hd a img{ width: 150px; }
+ .sohu_generalize_wrap .con_item .item_bd{ height: auto;padding-bottom: 0;border-bottom: 0; }
+ .sohu_generalize_wrap .con_item .item_tit{ margin-top: 0; }
+ .sohu_generalize_wrap .con_item .item_tit a{ margin-left: 0; }
+ .sohu_generalize_wrap .con_item .item_tit .item_name{ width: 150px; }
+ .sohu_generalize_wrap .con_item .play_bg{ width: 150px;height: 93px; }

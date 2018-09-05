@@ -1,0 +1,50 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<!--扫描com.igeek包下的所有java类  -->
+	<context:component-scan base-package="com.igeek"></context:component-scan>
+	
+	
+	
+	
+	<!-- 
+	类似于：DriverManagerDataSource dataSource = new DriverManagerDataSource();
+			dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+			dataSource.setUrl("jdbc:mysql:///igeekspring");
+			dataSource.setUsername("root");
+		    dataSource.setPassword("root");
+	 -->
+	<!-- 引入外部属性配置文件-->
+	<context:property-placeholder location="classpath:db.properties"/> 
+	
+	<!-- 配置内置的数据源bean，使用db.properties -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClass}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+
+	<!-- jdbctemplate对象 -->
+	<!-- <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		注入数据源
+		<property name="dataSource" ref="dataSource"/>
+	</bean> -->
+	
+	<bean id="bookDao" class="com.igeek.dao.BookDao">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+
+	
+	
+	
+</beans>

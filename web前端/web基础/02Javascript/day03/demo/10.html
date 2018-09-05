@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #test{
+            position:absolute;
+            width:100px;
+            height:100px;
+            background:red;
+            left:50px;
+        }
+    </style>
+</head>
+<body>
+<div id="test"></div>
+<button id="btn">btn</button>
+<script>
+    var btn = document.getElementById("btn");
+    var test = document.getElementById("test");
+    var timer;
+    btn.onclick = function () {
+        clearInterval(timer);
+        timer = setInterval(function () {
+            var speed = 1;
+            if(test.offsetLeft >=300){
+                clearInterval(timer)
+            }else{
+                test.style.left = test.offsetLeft+speed+"px";
+            }
+        },30)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width:100px;
+            height:100px;
+            background-color:#ff2d51;
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <button id="btn">toggle</button>
+    <script>
+        var btn = document.getElementById("btn");
+        var box = document.getElementById("box");
+        btn.onclick = function(){
+            var value = box.style.display;
+            console.log(value);
+           if(value == "block"){
+               box.style.display = "none"
+           }else{
+               box.style.display = "block"
+           }
+        }
+    </script>
+</body>
+</html>

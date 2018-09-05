@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- spring中，每个要创建的对象都是一个bean节点 -->
+	<!-- 设置2个参数，一个 id ，另一个 class -->
+	<!-- class:要new的对象，包含 包名和类名 -->
+	<!-- id:标识，java代码中根据这个标识来使用创建的对象 -->
+	<bean id="userDao" class="com.igeek.UserDaoImpl"></bean>
+	
+	<!--创建service对象  -->
+	<bean name="userService" class="com.igeek.spring.UserServiceImpl">
+		<!-- 配置依赖注入 -->
+		<!-- ref: userDao =bean id="userDao"  -->
+		<!--name="userDao" 与 UserServiceImpl中 setUserDao方法对应 -->
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+
+</beans>

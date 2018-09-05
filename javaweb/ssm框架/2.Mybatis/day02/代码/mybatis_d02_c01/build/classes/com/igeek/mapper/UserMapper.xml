@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 -->
+<mapper namespace="com.igeek.mapper.UserMapper">
+	<!-- 使用包装类型查询用户 -->
+	<select id="queryUserByQueryVo" parameterType="queryVo" resultType="user">
+		SELECT * FROM `user` WHERE username LIKE '%${user.username}%'
+	</select>
+	
+	
+	<select id="queryUserCount" resultType="int">
+		SELECT count(*) FROM 
+		  `user`
+	</select>
+	
+	
+	<!-- 根据条件查询用户 -->
+	<!-- <select id="queryUserByWhere" parameterType="user" resultType="user">
+		SELECT id, username, birthday, sex, address FROM `user`
+		WHERE sex = #{sex} AND username LIKE
+		'%${username}%'
+	</select> -->
+	
+	<select  id="queryUserByWhere" parameterType="user" resultType="user">
+		SELECT <include refid="sqlField"></include>  FROM `user`
+		<where>
+			<if test="sex != null">
+				sex = #{sex}
+			</if>
+			<if test="username != null and username !=''">
+				AND username LIKE
+				'%${username}%'
+			</if>
+		</where>
+	
+	</select>
+		
+	
+	<sql id="sqlField">
+		id, username, birthday, sex, address
+	</sql>
+	
+	<!-- 根据ids查询用户 -->
+	<select id="queryUserByIds" parameterType="queryVo" resultType="user">
+		SELECT * FROM `user`
+		<where>
+			<!-- foreach标签，进行遍历 -->
+			<!-- collection：遍历的集合，这里是QueryVo的ids属性 -->
+			<!-- item：遍历的项目，可以随便写，，但是和后面的#{}里面要一致 -->
+			<!-- open：在前面添加的sql片段 -->
+			<!-- close：在结尾处添加的sql片段 -->
+			<!-- separator：指定遍历的元素之间使用的分隔符 -->
+			<foreach collection="ids" item="item" open="id IN (" close=")"
+				separator=",">
+				#{item}
+			</foreach>
+		</where>
+	</select>
+	
+	
+	<!-- 一对一关联查询 -->
+	<select id="queryOne2One" resultType="orderUser">
+		SELECT
+			o.id,
+			o.user_id
+			userId,
+			o.number,
+			o.createtime,
+			o.note,
+			u.username,
+			u.address
+			FROM
+			`orders` o
+			LEFT JOIN `user` u ON o.user_id = u.id	
+	</select>
+	
+	
+	<resultMap type="order" id="orderUserResultMap">
+		<id property="id" column="id" />
+		<result property="userId" column="user_id" />
+		<result property="number" column="number" />
+		<result property="createtime" column="createtime" />
+		<result property="note" column="note" />
+	
+		<!-- association ：配置一对一属性 -->
+		<!-- property:Order里面的User属性名 -->
+		<!-- javaType:属性类型 -->
+		<association property="user" javaType="user">
+			<!-- id:声明主键，表示user_id是关联查询对象的唯一标识-->
+			<id property="id" column="user_id" />
+			<result property="username" column="username" />
+			<result property="address" column="address" />
+		</association>
+	
+	</resultMap>
+	
+	<!-- 一对一关联，查询订单，订单内部包含用户属性 -->
+	<select id="queryOrderUserResultMap" resultMap="orderUserResultMap">
+		SELECT
+		o.id,
+		o.user_id,
+		o.number,
+		o.createtime,
+		o.note,
+		u.username,
+		u.address
+		FROM
+		`orders` o
+		LEFT JOIN `user` u ON o.user_id = u.id
+	</select>
+	
+	
+	<resultMap type="user" id="userOrderResultMap">
+		<id property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="birthday" column="birthday" />
+		<result property="sex" column="sex" />
+		<result property="address" column="address" />
+	
+		<!-- 配置一对多的关系 -->
+		<collection property="orders" javaType="list" ofType="order">
+			<!-- 配置主键，是关联Order的唯一标识 -->
+			<id property="id" column="oid" />
+			<result property="number" column="number" />
+			<result property="createtime" column="createtime" />
+			<result property="note" column="note" />
+		</collection>
+	</resultMap>
+	
+	<!-- 一对多关联，查询订单同时查询该用户下的订单 -->
+	<select id="queryUserOrder" resultMap="userOrderResultMap">
+		SELECT
+		u.id,
+		u.username,
+		u.birthday,
+		u.sex,
+		u.address,
+		o.id oid,
+		o.number,
+		o.createtime,
+		o.note
+		FROM
+		`user` u
+		LEFT JOIN `orders` o ON u.id = o.user_id
+	</select>
+		
+		
+		
+
+</mapper>

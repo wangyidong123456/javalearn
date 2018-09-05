@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        #parent {
+            width: 100px;
+            height: 100px;
+            background: #ff2d51;
+            position: absolute;
+
+        }
+
+        #child {
+            width: 20px;
+            height: 50px;
+            position: absolute;
+            top: 25px;
+            right: -20px;
+            background: #44cef6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="parent" style="left:-100px">
+        <div id="child">
+
+        </div>
+    </div>
+    <script>
+        /* 需求,parent——onmouseover，每间隔30,移动10，lef==0时停止 */
+        var parent = document.getElementById("parent");
+        var timer = null;
+
+        function goMove(speed, target) {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                var leftValue = parseInt(parent.style.left);
+          
+                if (leftValue == target) {
+                    clearInterval(timer)
+                } else {
+                    parent.style.left = leftValue + speed + "px";
+                }
+
+            }, 30)
+        }
+        parent.onmouseover = function () {
+            goMove(10, 0)
+        }
+        parent.onmouseout = function () {
+            goMove(-10, -100)
+        }
+    </script>
+</body>
+
+</html>

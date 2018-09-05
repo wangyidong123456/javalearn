@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+<p><a href="#" class="tooltip" title="这是我的超链接提示1">提示1</a></p>
+<p><a href="#" class="tooltip" title="这是我的超链接提示2">提示2</a></p>
+<p><a href="#"  title="这是自带提示1">自带提示1</a></p>
+<p><a href="#"  title="这是自带提示2">自带提示2</a></p>
+<script>
+    /*1.移动到class=tooltip上,讲当前项的title的值添加到一个div元素中
+    * 2.给这个div元素一个绝对定位,让其随鼠标的移动而移动
+    *
+    * */
+    $(function(){
+        var x=10;
+        var y=20;
+        $("a.tooltip").mouseover(function(e){
+            //鼠标移入时讲title的值给myTitle属性
+            this.myTitle = this.title;
+            this.title="";
+            var tooltip = "<div id='tooltip'>"+this.myTitle+"</div>";
+            $("body").append(tooltip);
+            $("#tooltip").css({
+                "position":"absolute",
+                "top": (e.pageY+y)+"px",
+                "left": (e.pageX+x)+"px"
+            }).show("fast")
+        }).mouseout(function(){
+            this.title=this.myTitle;
+            $("#tooltip").remove();
+        }).mousemove(
+                function(e){
+                    $("#tooltip").css({
+                        "position":"absolute",
+                        "top": (e.pageY+y)+"px",
+                        "left": (e.pageX+x)+"px"
+                    })
+                }
+        )
+
+    });
+</script>
+</body>
+</html>

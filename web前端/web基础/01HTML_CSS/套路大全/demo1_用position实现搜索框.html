@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/base.css"/>
+    <title></title>
+    <style>
+        *{margin:0;padding: 0;}
+        div{
+            width:250px;height:40px;margin-top:15px;
+            position:relative;
+        }
+        input{
+            box-sizing: border-box;
+            width:250px;
+            outline: none;
+            padding-left:20px;
+            height: 38px;
+            font-size: 14px;
+            border: 1px solid #eee;
+            border-radius: 40px;
+            background: #eee;
+        }
+        button{
+            border:none;
+            cursor: pointer;
+            width:24px;
+            height:24px;
+            display: block;
+            z-index: 100;
+            position:absolute;
+            top:50%;
+            margin-top:-12px;
+            right:5px;
+            background:url(images/icon4.png) no-repeat
+        }
+        input:focus div{width:300px;}
+        div>p:nth-child(){}
+
+    </style>
+</head>
+
+<body>
+<div class="center">
+    <input type="text" placeholder="搜素"/>
+    <button></button>
+</div>
+</body>
+<!--结束标签-->
+</html>

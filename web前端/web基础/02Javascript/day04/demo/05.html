@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script>
+        var test = document.getElementById("test");
+        var xhr = new XMLHttpRequest();
+        xhr.open("post","https://www.easy-mock.com/mock/5b230e1e6bed703a9b488c69/www.getTest.com/push",true);
+        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoeded");
+        xhr.send(null);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                var data = JSON.parse(xhr.responseText);
+                test.innerHTML = data.data.content
+            }
+        }
+    </script>
+</body>
+</html>

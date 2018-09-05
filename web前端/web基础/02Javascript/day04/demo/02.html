@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 将文本域中的天猫和淘宝换成** -->
+    <textarea name="" id="txt" cols="30" rows="10"></textarea>
+    <button id="filter">过滤</button>
+    <script>
+        var txt = document.getElementById("txt");
+        var filter = document.getElementById("filter");
+        var reg = /<[^<>]*>/g;
+        filter.onclick = function(){
+            var content = txt.value;
+            var filterContent = content.replace(reg,"");
+            txt.value = filterContent;
+        }
+    </script>
+</body>
+</html>

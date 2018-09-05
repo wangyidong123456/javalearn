@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #count{
+            color:red;
+        }
+    </style>
+</head>
+<p>你还可以输入<em id="count">0</em>/140字</p>
+<div>
+    <textarea name="" cols="30" rows="10" id="text"></textarea>
+</div>
+<body>
+    <script>
+        var count = document.getElementById("count");
+        var txt = document.getElementById("text");
+        console.log(txt);
+        document.onkeyup = function(){
+            var length = txt.value.length;
+            count.innerHTML = length;
+            
+        }
+       
+    </script>
+</body>
+</html>
